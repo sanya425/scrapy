@@ -71,14 +71,13 @@ class GridBlogPipeline(object):
         data = (
             item['title'], item['article_url'], item['text'],
             item['publication_date'], item['author'], item['tags'])
-
+        data_up = (
+            item['title'], item['article_url'], item['text'],
+            item['publication_date'], item['author'], item['tags'], item['title'])
         self.cur.execute(
-            f"""INSERT OR IGNORE INTO articles (title, article_url, text, publication_date, author, tags) 
+            """INSERT OR IGNORE INTO articles (title, article_url, text, publication_date, author, tags) 
             VALUES(?, ?, ?, ?, ?, ?)""", data)
         self.cur.execute(
-            f"""UPDATE articles SET title='{item['title']}', article_url='{item['article_url']}',
-            text='{item['text']}', publication_date='{item['publication_date']}',
-             author='{item['author']}', tags='{item['tags']}'
-             WHERE title='{item['title']}'"""
-        )
+            f"""UPDATE articles SET title=?, article_url=?,
+            text=?, publication_date=?, author=?, tags=? WHERE title=?""", data_up)
         self.conn.commit()
