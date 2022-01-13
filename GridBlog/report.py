@@ -22,20 +22,22 @@ conn = None
 try:
     conn = sqlite3.connect('GDblog.db')
 except Error as e:
-    print(e)
+    logger.error(e)
 cur = conn.cursor()
 
-if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table' AND name='table_name'"""):
-    cnt = ...
-    last_date = ...
+if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table' AND name='table_name'""").fetchone():
+    cnt = cur.execute("""SELECT MAX(id) FROM articles""").fetchone()
+    #last_date = ...
+    logger.debug('Update articles')
     os.system("scrapy crawl articles")
-    if cnt == ...:
-        print("There are no new blog posts since the last date")
+    if cnt == cur.execute("""SELECT MAX(id) FROM articles""").fetchone():
+        logger.debug("There are no new blog posts since the last date")
     else:
+        logger.debug('Update authors')
         os.system("scrapy crawl authors")
 
 else:
-    logger.debug('start spiders')
+    logger.debug('First start crawler')
     process_authors = subprocess.Popen(['scrapy', 'crawl', 'authors'])
     process_articles = subprocess.Popen(['scrapy', 'crawl', 'articles'])
     process_authors.wait()
