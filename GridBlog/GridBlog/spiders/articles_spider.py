@@ -24,15 +24,27 @@ class ArticlesSpider(scrapy.Spider):
         items = GridBlogItem()
         title = response.css('h1::text').get()
         article_url = response.url
+
         text = response.css('p::text').get()
         if len(text) <= 160:
             text += response.css('p::text').getall()[1]
             text = text[:160]
         else:
             text = text[:160]
-        publication_date = response.css('div.sdate::text').get().replace('\n', '').replace('\t', '').replace('•', '')
+
+        publication_date = response.css('div.sdate::text').get().replace('\n', '').replace('\t', '')\
+            .replace('•', '').replace(',', '')
+        temp_date = publication_date.split()
+        dict_month = {'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
+                      'Jul': '07', 'Aug': '08', 'Sep': '09', 'Oct': '10', 'Nov': '11', 'Dec': '12'}
+        temp_date[0] = dict_month[f"{temp_date[0]}"]
+        temp_date[0], temp_date[1] = temp_date[1], temp_date[0]
+        temp_date.reverse()
+        publication_date = '-'.join(temp_date)
+
         temp_authors = list(map(lambda x: x.strip(), response.css('body .author .sauthor .name::text').getall()))
         author = [x for x in temp_authors if x != '']
+
         meta = [x for x in response.css('meta').getall() if x.find('article:tag') != -1]
         tags = list(map(lambda x: x[x.find('"', x.find('content')) + 1:x.rfind('"')], meta))
         items['title'] = title
