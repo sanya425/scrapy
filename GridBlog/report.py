@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger('root')
+logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
 conn = None
 try:
@@ -16,7 +17,7 @@ except Error as e:
     logger.error(e)
 cur = conn.cursor()
 
-if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table' AND name='table_name'""").fetchone()[0]:
+if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table'""").fetchone()[0]:
     cnt = cur.execute("""SELECT MAX(id) FROM articles""").fetchone()
     logger.debug('Update articles')
     os.system("scrapy crawl articles")
@@ -72,7 +73,6 @@ for row in tags:
             tags_count[tag] += 1
 
 tags_count_sort = {x[0]: x[1] for x in sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:7]}
-print(tags_count_sort)
 plt.figure(figsize=(12.2, 5))
 ax = plt.subplot(111)
 ax.barh(list(tags_count_sort.keys()), list(tags_count_sort.values()))
