@@ -6,6 +6,11 @@ import sqlite3
 from sqlite3 import Error
 import matplotlib.pyplot as plt
 
+
+def number_of_tables():
+    return cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table'""").fetchone()[0]
+
+
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger('root')
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
@@ -17,7 +22,7 @@ except Error as e:
     logger.error(e)
 cur = conn.cursor()
 
-if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table'""").fetchone()[0]:
+if number_of_tables():
     cnt = cur.execute("""SELECT MAX(id) FROM articles""").fetchone()
     logger.debug('Update articles')
     os.system("scrapy crawl articles")

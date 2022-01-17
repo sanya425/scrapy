@@ -1,5 +1,5 @@
 import unittest
-import GridBlog.pipelines
+import report
 
 
 class TestPipelines(unittest.TestCase):
