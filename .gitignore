@@ -3,3 +3,5 @@
 /lib
 pyvenv.cfg
 /.idea
+/GridBlog/GridBlog/__pycache__
+/GridBlog/GDblog.db
