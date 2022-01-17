@@ -15,7 +15,7 @@ try:
 except Error as e:
     logger.error(e)
 cur = conn.cursor()
-'''
+
 if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table' AND name='table_name'""").fetchone()[0]:
     cnt = cur.execute("""SELECT MAX(id) FROM articles""").fetchone()
     logger.debug('Update articles')
@@ -33,7 +33,7 @@ else:
     process_authors = subprocess.Popen(['scrapy', 'crawl', 'authors'])
     process_authors.wait()
     process_articles.wait()
-'''
+
 sql_articles = """SELECT title, publication_date, tags FROM articles"""
 sql_authors = """SELECT author, count_article FROM authors"""
 df_articles = pd.read_sql_query(sql_articles, conn)
