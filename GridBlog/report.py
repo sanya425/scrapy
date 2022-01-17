@@ -4,6 +4,7 @@ import os
 import pandas as pd
 import sqlite3
 from sqlite3 import Error
+import matplotlib.pyplot as plt
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 logger = logging.getLogger('root')
@@ -14,7 +15,7 @@ try:
 except Error as e:
     logger.error(e)
 cur = conn.cursor()
-
+'''
 if cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table' AND name='table_name'""").fetchone()[0]:
     cnt = cur.execute("""SELECT MAX(id) FROM articles""").fetchone()
     logger.debug('Update articles')
@@ -32,7 +33,7 @@ else:
     process_authors = subprocess.Popen(['scrapy', 'crawl', 'authors'])
     process_authors.wait()
     process_articles.wait()
-
+'''
 sql_articles = """SELECT title, publication_date, tags FROM articles"""
 sql_authors = """SELECT author, count_article FROM authors"""
 df_articles = pd.read_sql_query(sql_articles, conn)
@@ -61,4 +62,19 @@ print('TOP-5 ARTICLES:')
 print(*[x + '\n' for x in sorted_df_articles['title'].head(5)])
 print('-' * 80)
 
+tags = list(map(lambda x: x.split(';'), df_articles['tags']))
+tags_count = {}
+for row in tags:
+    for tag in row:
+        if tag not in tags_count:
+            tags_count[tag] = 1
+        else:
+            tags_count[tag] += 1
 
+tags_count_sort = {x[0]: x[1] for x in sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:7]}
+print(tags_count_sort)
+plt.figure(figsize=(12.2, 5))
+ax = plt.subplot(111)
+ax.barh(list(tags_count_sort.keys()), list(tags_count_sort.values()))
+ax.grid(axis='x')
+plt.show()
