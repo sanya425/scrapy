@@ -7,6 +7,9 @@ import scrapy
 
 
 class GridBlogItem(scrapy.Item):
+    """
+
+    """
     # define the fields for your item here like:
     title = scrapy.Field()
     article_url = scrapy.Field()
@@ -19,6 +22,5 @@ class GridBlogItem(scrapy.Item):
     job_title = scrapy.Field()
     linked_in_url = scrapy.Field()
     count_article = scrapy.Field()
-
 
     article = scrapy.Field()

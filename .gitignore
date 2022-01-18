@@ -4,6 +4,4 @@
 pyvenv.cfg
 /.idea
 /GridBlog/GridBlog/__pycache__
-/GridBlog/GridBlog/spiders/__pycache__
 /GridBlog/GDblog.db
-/GridBlog/scrapy.cfg

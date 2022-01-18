@@ -1,9 +1,8 @@
 import unittest
-import GridBlog.pipelines
+import report
 
 
 class TestPipelines(unittest.TestCase):
-
     def test_connection(self):
         self.assertEqual()
 
