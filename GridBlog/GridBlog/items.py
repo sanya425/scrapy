@@ -8,7 +8,7 @@ import scrapy
 
 class GridBlogItem(scrapy.Item):
     """
-
+    the name of the items I use
     """
     # define the fields for your item here like:
     title = scrapy.Field()

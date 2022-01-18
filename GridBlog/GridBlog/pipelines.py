@@ -16,7 +16,8 @@ class GridBlogPipeline(object):
     """
 
     def __init__(self):
-        self.create_connection()
+        self.conn = self.create_connection()
+        self.cur = self.conn.cursor()
         self.create_tables()
 
     def create_connection(self):
@@ -25,7 +26,7 @@ class GridBlogPipeline(object):
             self.conn = sqlite3.connect('GDblog.db')
         except Error as e:
             print(e)
-        self.cur = self.conn.cursor()
+        return self.conn
 
     def create_tables(self):
         self.cur.execute("""CREATE TABLE IF NOT EXISTS articles(
