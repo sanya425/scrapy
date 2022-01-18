@@ -11,6 +11,9 @@ from sqlite3 import Error
 
 
 class GridBlogPipeline(object):
+    """
+    Pipeline to sqlite3
+    """
 
     def __init__(self):
         self.create_connection()
@@ -44,6 +47,12 @@ class GridBlogPipeline(object):
         )""")
 
     def process_item(self, item, spider):
+        """
+        Choice table to insert data
+        :param item: class scrapy.Item
+        :param spider: class scrapy.Spider
+        :return: class scrapy.Item
+        """
         if spider.name == 'authors':
             self.insert_authors(item)
         elif spider.name == 'articles':
@@ -53,6 +62,11 @@ class GridBlogPipeline(object):
         return item
 
     def insert_authors(self, item):
+        """
+        INSERT OR UPDATE data in the table 'authors'
+        :param item: class scrapy.Item
+        :return: None
+        """
         data = (item['author'], item['job_title'], item['linked_in_url'], item['count_article'])
         self.cur.execute(
             f"""INSERT OR IGNORE INTO authors (author, job_title, linked_in_url, count_article) 
@@ -64,8 +78,12 @@ class GridBlogPipeline(object):
         )
         self.conn.commit()
 
-
     def insert_articles(self, item):
+        """
+        INSERT OR UPDATE data in the table 'articles'
+        :param item: class scrapy.Item
+        :return: None
+        """
         item['author'] = ';'.join(item['author'])
         item['tags'] = ';'.join(item['tags'])
         data = (

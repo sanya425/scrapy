@@ -9,11 +9,19 @@ class ArticlesSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
+        """
+        Go to all links 'view more'
+        :return: callback parse_link
+        """
         sub_pages = response.css('.domainblock .row.regular .card:nth-child(4n)::attr(href)').getall()
         for href in sub_pages:
             yield response.follow(href, callback=self.parse_link)
 
     def parse_link(self, response):
+        """
+        Go to all articles pages
+        :return: callback parse_article
+        """
         all_articles_links = response.css(
             '.domainblock.cardleft .row.first a.card::attr(href)').getall() + response.css(
             '.domainblock .row.regular .card::attr(href)').getall()
@@ -21,6 +29,10 @@ class ArticlesSpider(scrapy.Spider):
             yield response.follow(href, callback=self.parse_article)
 
     def parse_article(self, response):
+        """
+        Parse the page with article
+        :return: class scrapy.Item
+        """
         items = GridBlogItem()
         title = response.css('h1::text').get()
         article_url = response.url

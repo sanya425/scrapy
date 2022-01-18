@@ -3,7 +3,6 @@ import report
 
 
 class TestPipelines(unittest.TestCase):
-
     def test_connection(self):
         self.assertEqual()
 
