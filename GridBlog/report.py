@@ -91,10 +91,10 @@ def plot_top_tags(df_articles):
                 tags_count[tag] += 1
 
     tags_count_sort = {x[0]: x[1] for x in sorted(tags_count.items(), key=lambda x: x[1], reverse=True)[:7]}
-    plt.figure(figsize=(12.2, 5))
+    plt.figure(figsize=(20, 5))
     ax = plt.subplot(111)
-    ax.barh(list(tags_count_sort.keys()), list(tags_count_sort.values()))
-    ax.grid(axis='x')
+    ax.bar(list(tags_count_sort.keys()), list(tags_count_sort.values()))
+    ax.grid(axis='y')
     plt.show()
 
 
