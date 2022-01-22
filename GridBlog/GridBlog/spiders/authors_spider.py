@@ -1,6 +1,5 @@
 import scrapy
-from ..items import GridBlogItem
-
+import GridBlog.items as GD_items
 
 class AuthorsSpider(scrapy.Spider):
     """
@@ -25,7 +24,7 @@ class AuthorsSpider(scrapy.Spider):
         Parse the author`s card
         :return: class scrapy.Item
         """
-        items = GridBlogItem()
+        items = GD_items.GridBlogItem()
         author = response.css('body.authors.author .modalbg .authorcard.popup h3::text').get()
         linked_in_url = response.css('body.authors.author .modalbg .authorcard.popup li.socicon a::attr(href)').get()
         job_title = response.css('body.authors.author .modalbg .authorcard.popup p.jobtitle::text').get()
@@ -41,5 +40,6 @@ class AuthorsSpider(scrapy.Spider):
         items['author'] = author
         items['count_article'] = count_article
         yield items
+
 
 

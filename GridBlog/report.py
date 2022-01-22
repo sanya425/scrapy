@@ -25,14 +25,14 @@ def create_connection(db_file):
 
 
 def number_of_tables(cur):
-    """Returns number of table, where tbl_name='articles'
+    """Returns number of table'
     :param cur: database`s cursor
     :type cur: class sqlite3.Cursor
     :rtype: int
-    :return: 1 - if table 'articles' exists, else - 0
+    :return: 2 - if table 'articles' and 'authors' exists, else - 0
     """
-    return cur.execute("""SELECT count(*) FROM sqlite_master WHERE type='table' AND tbl_name='articles'""").fetchone()[
-        0]
+    sql = """SELECT count(*) FROM sqlite_master WHERE type='table'"""
+    return cur.execute(sql).fetchone()[0]
 
 
 def print_top_author(df_authors):
@@ -132,6 +132,13 @@ def main():
     print_top_author(df_authors)
     print_top_articles(df_articles)
     plot_top_tags(df_articles)
+
+
+def add_items(items, linked_in_url, job_title, author, count_article):
+    items['linked_in_url'] = linked_in_url
+    items['job_title'] = job_title
+    items['author'] = author
+    items['count_article'] = count_article
 
 
 if __name__ == '__main__':
