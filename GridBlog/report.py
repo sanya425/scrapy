@@ -133,13 +133,5 @@ def main():
     print_top_articles(df_articles)
     plot_top_tags(df_articles)
 
-
-def add_items(items, linked_in_url, job_title, author, count_article):
-    items['linked_in_url'] = linked_in_url
-    items['job_title'] = job_title
-    items['author'] = author
-    items['count_article'] = count_article
-
-
 if __name__ == '__main__':
     main()

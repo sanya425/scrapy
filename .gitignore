@@ -6,4 +6,10 @@ pyvenv.cfg
 /GridBlog/GridBlog/__pycache__
 /GridBlog/GDblog.db
 /GridBlog/GridBlog/spiders/__pycache__
+/_trial_temp
+/GridBlog/.idea
+/GridBlog/.DS_Store
+/GridBlog/GridBlog/.DS_Store
+.DS_Store
+/GridBlog/scrapy.cfg
 /GridBlog/_trial_temp

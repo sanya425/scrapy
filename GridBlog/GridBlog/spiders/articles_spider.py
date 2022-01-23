@@ -36,7 +36,6 @@ class ArticlesSpider(scrapy.Spider):
         items = GridBlogItem()
         title = response.css('h1::text').get()
         article_url = response.url
-
         text = response.css('p::text').get()
         if len(text) <= 160:
             text += response.css('p::text').getall()[1]
@@ -55,10 +54,10 @@ class ArticlesSpider(scrapy.Spider):
         publication_date = '-'.join(temp_date)
 
         temp_authors = list(map(lambda x: x.strip(), response.css('body .author .sauthor .name::text').getall()))
-        author = [x for x in temp_authors if x != '']
+        author = ';'.join([x for x in temp_authors if x != ''])
 
         meta = [x for x in response.css('meta').getall() if x.find('article:tag') != -1]
-        tags = list(map(lambda x: x[x.find('"', x.find('content')) + 1:x.rfind('"')], meta))
+        tags = ';'.join(list(map(lambda x: x[x.find('"', x.find('content')) + 1:x.rfind('"')], meta)))
         items['title'] = title
         items['article_url'] = article_url
         items['text'] = text

@@ -85,8 +85,6 @@ class GridBlogPipeline(object):
         :param item: class scrapy.Item
         :return: None
         """
-        item['author'] = ';'.join(item['author'])
-        item['tags'] = ';'.join(item['tags'])
         data = (
             item['title'], item['article_url'], item['text'],
             item['publication_date'], item['author'], item['tags'])
