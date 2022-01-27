@@ -66,9 +66,9 @@ class TestReport(unittest.TestCase):
                     ' addressed using the vendors, contracts, and sourcing strategies used for traditional IT. '
                     'These strategies work best with conventional IT projects for which they were initially designed.',
 
-            'publication_date': '\n\t\t\t\t\t\t\tDec 30, 2019\n\t\t\t\t\t\t\t• ',#'2019-12-30'
+            'publication_date': '\n\t\t\t\t\t\t\tDec 30, 2019\n\t\t\t\t\t\t\t• ',
             'author': ['\n\t\t\t\t\t\t\t\t\t\t\tMax Martynov', '\n\t\t\t\t\t\t\t\t\t\t',
-                       '\n\t\t\t\t\t\t\t\t\t\t\tEzra Berger', '\n\t\t\t\t\t\t\t\t\t\t'],#'Max Martynov;Ezra Berger'
+                       '\n\t\t\t\t\t\t\t\t\t\t\tEzra Berger', '\n\t\t\t\t\t\t\t\t\t\t'],
             'tags': ['<meta charset="utf-8">', '<meta http-equiv="X-UA-Compatible" content="IE=edge">',
                      '<meta name="HandheldFriendly" content="True">',
                      '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
@@ -123,7 +123,7 @@ class TestReport(unittest.TestCase):
                      '<meta itemprop="dateModified" content="Jan 19, 2022">',
                      '<meta itemprop="url" content="https://blog.griddynamics.com/assets/i/griddynamics.jpg">',
                      '<meta itemprop="width" content="227">', '<meta itemprop="height" content="57">',
-                     '<meta itemprop="url" content="https://blog.griddynamics.com/assets/i/griddynamics.jpg">']#'CICD;E-commerce'
+                     '<meta itemprop="url" content="https://blog.griddynamics.com/assets/i/griddynamics.jpg">']
         }
         data_res = {
             'title': 'Art.com helps customers find art they love with visual search',
@@ -156,4 +156,3 @@ if __name__ == '__main__':
 
 # python -m unittest discover
 # python -m unittest filename.py
-# type hints; mock; git

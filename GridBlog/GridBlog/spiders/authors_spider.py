@@ -1,6 +1,6 @@
 import scrapy
-#import GridBlog.GridBlog.items as GD_items
 from ..items import GridBlogItem
+
 
 class AuthorsSpider(scrapy.Spider):
     """
@@ -41,6 +41,3 @@ class AuthorsSpider(scrapy.Spider):
         items['author'] = author
         items['count_article'] = count_article
         yield items
-
-
-
