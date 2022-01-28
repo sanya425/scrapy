@@ -315,7 +315,6 @@ pyvenv.cfg
 /GridBlog/.idea
 /GridBlog/.DS_Store
 /GridBlog/GridBlog/.DS_Store
-/GridBlog/scrapy.cfg
 /GridBlog/_trial_temp
 
 
