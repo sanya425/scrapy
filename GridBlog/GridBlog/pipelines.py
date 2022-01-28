@@ -69,14 +69,12 @@ class GridBlogPipeline(object):
         :return: None
         """
         data = (item['author'], item['job_title'], item['linked_in_url'], item['count_article'])
+        data_up = (item['author'], item['job_title'], item['linked_in_url'], item['count_article'], item['author'])
         self.cur.execute(
-            f"""INSERT OR IGNORE INTO authors (author, job_title, linked_in_url, count_article) 
-            VALUES(?, ?, ?, ?)""", data)
+            """INSERT OR IGNORE INTO authors (author, job_title, linked_in_url, count_article) VALUES(?, ?, ?, ?)""",
+            data)
         self.cur.execute(
-            f"""UPDATE authors SET author='{item['author']}', job_title='{item['job_title']}',
-            linked_in_url='{item['linked_in_url']}', count_article='{item['count_article']}'
-             WHERE author='{item['author']}'"""
-        )
+            """UPDATE authors SET author=?, job_title=?, linked_in_url=?, count_article=? WHERE author=?""", data_up)
         self.conn.commit()
 
     def insert_articles(self, item):
@@ -95,6 +93,6 @@ class GridBlogPipeline(object):
             """INSERT OR IGNORE INTO articles (title, article_url, text, publication_date, author, tags) 
             VALUES(?, ?, ?, ?, ?, ?)""", data)
         self.cur.execute(
-            f"""UPDATE articles SET title=?, article_url=?,
+            """UPDATE articles SET title=?, article_url=?,
             text=?, publication_date=?, author=?, tags=? WHERE title=?""", data_up)
         self.conn.commit()
