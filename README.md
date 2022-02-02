@@ -13,7 +13,7 @@ Create virtual environment, all library in the file 'requirements.txt'
 1) If you don`t have library 'virtualenv', use the package manager [pip](https://pip.pypa.io/en/stable/) to install
    'virtualenv'.
 ```bash
-pip install virtualenv
+python3 -m pip install virtualenv
 ```
 2) Create and activate your virtual environment
 ```bash

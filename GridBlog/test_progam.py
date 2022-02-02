@@ -147,7 +147,6 @@ class TestReport(unittest.TestCase):
         res = list(parse_a.parse_article(mock_response))[0]
         mock_response.css().get.assert_called()
         mock_response.css().getall.assert_called()
-        print(mock_response.mock_calls)
         self.assertEqual(res, data_res)
 
 
