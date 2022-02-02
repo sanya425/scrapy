@@ -27,5 +27,6 @@ python3 -m pip install -r GridBlog/requirements.txt
 ## Usage
 To start project run command
 ```bash
-python GridBlog/report.py
+cd GridBlog/
+python3 report.py
 ```
