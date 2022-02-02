@@ -22,7 +22,7 @@ source [name of your new virtual environment]/bin/activate
 ```
 3) Install all library from the file 'requirements.txt'
 ```bash
-pip install -r GridBlog/requirements.txt
+python3 -m pip install -r GridBlog/requirements.txt
 ```
 ## Usage
 To start project run command
