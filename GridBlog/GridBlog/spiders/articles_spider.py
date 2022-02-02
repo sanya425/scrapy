@@ -43,7 +43,7 @@ class ArticlesSpider(scrapy.Spider):
         else:
             text = text[:160]
 
-        publication_date = response.css('div.sdate::text').get().replace('\n', '').replace('\t', '')\
+        publication_date = response.css('div.sdate::text').get().replace('\n', '').replace('\t', '') \
             .replace('•', '').replace(',', '')
         temp_date = publication_date.split()
         dict_month = {'Jan': '01', 'Feb': '02', 'Mar': '03', 'Apr': '04', 'May': '05', 'Jun': '06',
@@ -65,5 +65,3 @@ class ArticlesSpider(scrapy.Spider):
         items['author'] = author
         items['tags'] = tags
         yield items
-
-

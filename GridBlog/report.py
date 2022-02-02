@@ -133,5 +133,6 @@ def main():
     print_top_articles(df_articles)
     plot_top_tags(df_articles)
 
+
 if __name__ == '__main__':
     main()
